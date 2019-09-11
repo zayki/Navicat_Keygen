@@ -559,7 +559,7 @@ namespace Navicat_Keygen_Patch_By_DFoX
                     MessageBox.Show("Error DI Value is null...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                lic = String.Format("{{\"K\":\"{0}\", \"DI\":\"{1}\", \"N\":\"{2}\", \"O\":\"{3}\", \"T\":{4}}}"/*, \"P\":\"{2}\"*/, snKey != null ? snKey : tserial.Text.Trim().Replace("-", ""), DeviceIdentifier, tname.Text.Trim(), torganization.Text.Trim(), tval/*, Platform != null ? Platform : cMac.Checked ? "Mac 10.13" : "WIN 8"*/);
+                lic = String.Format("{{\"K\":\"{0}\", \"DI\":\"{1}\", \"N\":\"{2}\", \"O\":\"{3}\", \"T\":{4}}}", snKey != null ? snKey : tserial.Text.Trim().Replace("-", ""), DeviceIdentifier, tname.Text.Trim(), torganization.Text.Trim(), tval);
                 eng.Init(true, keys.Private);
                 bytelic = Encoding.ASCII.GetBytes(lic);
                 licenza = eng.ProcessBlock(bytelic, 0, bytelic.Length);
@@ -575,7 +575,7 @@ namespace Navicat_Keygen_Patch_By_DFoX
             }
             else
             {
-                lic = String.Format("{{\"K\":\"{0}\", \"N\":\"{1}\", \"O\":\"{2}\", \"T\":{3}}}", snKey != null ? snKey : tserial.Text.Trim().Replace("-", ""), tname.Text.Trim(), torganization.Text.Trim(), tval/*, Platform != null ? Platform : cMac.Checked ? "Mac 10.13" : "WIN 8"*/);
+                lic = String.Format("{{\"K\":\"{0}\", \"N\":\"{1}\", \"O\":\"{2}\", \"T\":{3}}}", snKey != null ? snKey : tserial.Text.Trim().Replace("-", ""), tname.Text.Trim(), torganization.Text.Trim(), tval);
                 eng.Init(true, keys.Private);
                 bytelic = Encoding.ASCII.GetBytes(lic);
                 licenza = eng.ProcessBlock(bytelic, 0, bytelic.Length);
@@ -994,8 +994,8 @@ namespace Navicat_Keygen_Patch_By_DFoX
             p.Start();
             using (var timer = new System.Threading.Timer(delegate { tp(); }, null, 60000, Timeout.Infinite))
             {
-                string error = p.StandardOutput.ReadToEnd();
-                if (error.Contains("Patch has been done successfully"))
+                string error = p.StandardOutput.ReadToEnd().ToLower();
+                if (error.Contains("patch has been done successfully"))
                 {
                     if (clin.Checked)
                     {
